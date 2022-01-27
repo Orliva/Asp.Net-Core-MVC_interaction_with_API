@@ -1,0 +1,43 @@
+﻿@model Valute
+@{
+    if (Model.CharCode != "No data".ToUpper())
+        ViewData["Title"] = "Currency " + @Model.CharCode;
+    else
+        ViewData["Title"] = "No found valute";
+    //Layout = null;
+}
+
+<style>
+        @@font-face {
+            font-family: 'FontAwesome';
+            src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), 
+            url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), 
+            url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal
+        }
+ 
+        .glyphicon {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+ 
+        .glyphicon-chevron-right:before {
+            content: "\f054";
+        }
+ 
+        .glyphicon-chevron-left:before {
+            content: "\f053";
+        }
+</style>
+
+<table class="table">
+    <tr><th>Id</th><th>NumCode</th><th>CharCode</th><th>Nominal</th>
+        <th>Name</th><th>Value</th><th>Previous</th></tr>
+        <tr><td>@Model.ID</td><td>@Model.NumCode</td><td>@Model.CharCode</td><td>@Model.Nominal</td>
+            <td>@Model.Name</td><td>@Model.Value</td><td>@Model.Previous</td></tr>
+</table>

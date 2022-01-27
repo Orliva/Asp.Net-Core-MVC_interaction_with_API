@@ -1,0 +1,100 @@
+﻿@model ViewPageCbrModel
+@{
+    ViewData["Title"] = "Currencies";
+    //Layout = null;
+}
+
+<style>
+        @@font-face {
+            font-family: 'FontAwesome';
+            src: url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2') format('woff2'), 
+            url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff') format('woff'), 
+            url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal
+        }
+ 
+        .glyphicon {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+ 
+        .glyphicon-chevron-right:before {
+            content: "\f054";
+        }
+ 
+        .glyphicon-chevron-left:before {
+            content: "\f053";
+        }
+</style>
+<h1>Список валют</h1>
+<table class="table">
+    <tr><th>Id</th><th>NumCode</th><th>CharCode</th><th>Nominal</th>
+        <th>Name</th><th>Value</th><th>Previous</th></tr>
+    @foreach (Valute u in Model.Valute)
+    {
+        <tr>
+            <td>
+                <a href="~/Home/Currency/@u.CharCode">
+                    @u.ID
+                </a>
+            </td>
+            <td>@u.NumCode</td>
+            <td>@u.CharCode</td>
+            <td>@u.Nominal</td>
+            <td>@u.Name</td>
+            <td>@u.Value</td>
+            <td>@u.Previous</td>
+        </tr>
+    }
+</table>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Currencies"
+       asp-route-curPage="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-pageSize="@(ViewBag.PageSize)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Currencies"
+       asp-route-curPage="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-pageSize="@(ViewBag.PageSize)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+@*<head>
+
+<link rel="dns-prefetch" href="https://www.cbr-xml-daily.ru/" />
+@*<script>//src="https://www.cbr-xml-daily.ru/daily_json.js" >
+    var request = new XMLHttpRequest();
+    request.open("GET", "https://www.cbr-xml-daily.ru/daily_json.js", false);
+    request.send();
+    //@ViewBag.jsonStr = @Context.Request.Body;//request.responseText;
+    console.log("requestStatus: " + request.status);
+    console.log(request.responseText);
+</script>*@
+@*</head>
+
+<ul id="list">
+    <li>Первый Элемент, Ручной :)</li>
+    <li>@Model.Date</li>
+    <li>@Model.PreviousDate</li>
+    <li>@Model.PreviousURL</li>
+    <li>@Model.Timestamp</li>
+    @foreach(var i in @Model.Valute)
+    {
+        <li>@i.Value.CharCode</li>
+    }
+    @*<li>@ViewBag.jsonStr</li>*@
+@*</ul>*@
